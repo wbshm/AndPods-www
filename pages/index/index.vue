@@ -85,7 +85,7 @@
 					</view>
 				</uni-col>
 				<uni-col :span="12">
-					<view class="card-info" style="margin:15rpx 15rpx 15rpx 0rpx">
+					<view class="card-info" style="margin:15rpx 0rpx 15rpx 15rpx">
 						<a href="//support.qq.com/product/387882" class="social-a">
 							<image src="/static/svg/shequ.svg" style="max-width: 100rpx;max-height: 100rpx;"></image>
 							<uni-title type="h3" title="QQ频道"></uni-title>
@@ -94,14 +94,11 @@
 				</uni-col>
 			</uni-row>
 		</view>
-
 		<view class="mar-30 download-view">
 			<a href="https://a.app.qq.com/o/simple.jsp?pkgname=cn.xiaolongonly.andpodsop" class="manu-a">
 				<button class="download-btn">立即下载</button>
 			</a>
 		</view>
-
-
 		<view style="display: flex;">
 			<!-- 普通弹窗 -->
 			<uni-popup ref="popup" background-color="#fff" style="">
