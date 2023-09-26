@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app",
+				"navigationBarTitleText": "AndPods - 蓝牙耳机 必备神器",
 				"navigationStyle":"custom"//隐藏barTitle
 			}
 		}
