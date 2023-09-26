@@ -16,12 +16,13 @@
 				</uni-col>
 			</uni-row>
 		</view>
-		<view style="margin:0 4% 0% 2%;">
+		<view style="margin:0 4% 0% 2%;height: auto;">
 			<uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
-				<swiper class="swiper-box" @change="change" autoplay="true" next-margin="40rpx" circular="true">
+				<swiper class="swiper-box" :style="{height:swiperHeight+'px'}" @change="change" next-margin="0"
+					circular="true">
 					<swiper-item v-for="(item, index) in info" :key="index">
 						<view class="swiper-item align-center">
-							<image class="swiper-img" :src="item.content"></image>
+							<image class="swiper-img" mode="widthFix" :src="item.content"  @load="recalculateHeight()"></image>
 						</view>
 					</swiper-item>
 				</swiper>
@@ -109,9 +110,12 @@
 					</image>
 					<uni-list class="align-center">
 						<a href="#/" class="manu-a"><uni-list-item title="主页"></uni-list-item></a>
-						<a href="https://a.app.qq.com/o/simple.jsp?pkgname=cn.xiaolongonly.andpodsop" class="manu-a"><uni-list-item title="下载APP"></uni-list-item></a>
-						<a href="https://www.andpods.cn/agreement" class="manu-a"><uni-list-item title="服务条款"></uni-list-item></a>
-						<a href="https://www.andpods.cn/privacy" class="manu-a"><uni-list-item title="隐私政策"></uni-list-item></a>
+						<a href="https://a.app.qq.com/o/simple.jsp?pkgname=cn.xiaolongonly.andpodsop"
+							class="manu-a"><uni-list-item title="下载APP"></uni-list-item></a>
+						<a href="https://www.andpods.cn/agreement" class="manu-a"><uni-list-item
+								title="服务条款"></uni-list-item></a>
+						<a href="https://www.andpods.cn/privacy" class="manu-a"><uni-list-item
+								title="隐私政策"></uni-list-item></a>
 					</uni-list>
 				</view>
 			</uni-popup>
@@ -136,15 +140,28 @@
 				}],
 				current: 0,
 				mode: 'round',
+				swiperHeight: 500,
 				scrollTop: 0,
 				old: {
 					scrollTop: 0
 				}
 			}
 		},
+		onLoad() {
+			// this.recalculateHeight();
+		},
 		methods: {
 			change(e) {
-				this.current = e.detail.current
+				this.current = e.detail.current;
+			},
+			recalculateHeight() {
+				let query = uni.createSelectorQuery().in(this)
+				query.selectAll(".swiper-img").boundingClientRect()
+				query.exec(res => {
+					if (res && res[0] && res[0][this.current]) {
+						this.swiperHeight = res[0][this.current].height;
+					}
+				})
 			},
 			toggle(type) {
 				this.$refs.popup.open("left")
@@ -160,12 +177,11 @@
 	}
 
 	.swiper-box {
-		height: 85vh;
+		min-height: 100%;
 	}
 
 	.swiper-item {
 		max-height: 85vh;
-		height: 100vh;
 		width: 100%;
 	}
 
@@ -201,7 +217,7 @@
 	}
 
 	.swiper-img {
-		height: 85vh;
+		height: 100%;
 		border-radius: 30rpx;
 	}
 
