@@ -1,0 +1,43 @@
+# hbuilderx
+.hbuilderx
+uni_modules/
+
+# macOS and Windows
+.DS_Store
+Thumbs.db
+
+# Node.js related
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+/dist/
+/.temp/
+
+# IDE-specific files (Visual Studio Code, WebStorm, etc.)
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# UniApp build files
+/unpackage/
+
+# Environment-specific files
+.env.local
+.env.*.local
+.env.test
+.env.production
+
+# Log files
+*.log
+
+# Generated files
+*.bak
+*.lock
+
+# Miscellaneous
+*.bak
+*.swp
