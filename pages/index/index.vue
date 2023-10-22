@@ -18,11 +18,12 @@
 		</view>
 		<view style="margin:0 4% 0% 2%;height: auto;">
 			<uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
-				<swiper class="swiper-box" :style="{height:swiperHeight+'px'}" @change="change" next-margin="0"
-					circular="true">
+				<swiper class="swiper-box" :style="{height:swiperHeight+'px'}" @change="change"
+					:next-margin="swiperNext+'px'" circular="true" autoplay="true" interval="3000">
 					<swiper-item v-for="(item, index) in info" :key="index">
 						<view class="swiper-item align-center">
-							<image class="swiper-img" mode="widthFix" :src="item.content"  @load="recalculateHeight()"></image>
+							<image class="swiper-img" mode="widthFix" :src="item.content" @load="recalculateHeight()">
+							</image>
 						</view>
 					</swiper-item>
 				</swiper>
@@ -137,6 +138,7 @@
 				}],
 				current: 0,
 				mode: 'round',
+				swiperNext: 0,
 				swiperHeight: 500,
 				scrollTop: 0,
 				old: {
@@ -145,7 +147,25 @@
 			}
 		},
 		onLoad() {
-			// this.recalculateHeight();
+			var _paq = window._paq = window._paq || [];
+			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+			_paq.push(['trackPageView']);
+			_paq.push(['enableLinkTracking']);
+			(function() {
+				var u = "//matomo.andpods.com/";
+				_paq.push(['setTrackerUrl', u + 'matomo.php']);
+				_paq.push(['setSiteId', '1']);
+				var d = document,
+					g = d.createElement('script'),
+					s = d.getElementsByTagName('script')[0];
+				g.async = true;
+				g.src = u + 'matomo.js';
+				s.parentNode.insertBefore(g, s);
+			})();
+
+			this.swiperNext = (document.documentElement.clientWidth - 340) / 2
+			this.swiperNext = Math.max(0, this.swiperNext)
+			this.swiperNext = this.swiperNext >= 230 ? 0 : this.swiperNext
 		},
 		methods: {
 			change(e) {
